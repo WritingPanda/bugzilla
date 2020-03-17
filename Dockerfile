@@ -5,8 +5,8 @@
 # Based on dklawren/docker-bugzilla 
 #
 
-FROM phusion/baseimage:0.9.16
-MAINTAINER gameldar@gmail.com
+FROM phusion/baseimage
+LABEL maintainer="WritingPanda"
 
 ENV BUGZILLA_USER bugzilla
 ENV BUGZILLA_HOME /home/$BUGZILLA_USER
@@ -14,7 +14,7 @@ ENV BUGZILLA_ROOT $BUGZILLA_HOME/devel/htdocs/bugzilla
 ENV BUGZILLA_URL http://localhost/bugzilla
 
 ENV GITHUB_BASE_GIT https://github.com/bugzilla/bugzilla
-ENV GITHUB_BASE_BRANCH 5.0
+ENV GITHUB_BASE_BRANCH 5.2
 ENV GITHUB_QA_GIT https://github.com/bugzilla/qa
 
 ENV ADMIN_EMAIL admin@bugzilla.com
@@ -22,17 +22,17 @@ ENV ADMIN_PASSWORD password
 
 ENV BUGS_DB_DRIVER Pg
 ENV BUGS_DB_HOST localhost
-ENV BUGS_DB_PORT 0
-ENV BUGS_DB_NAME bugs
-ENV BUGS_DB_USER bugs
-ENV BUGS_DB_PASS bugs
+ENV BUGS_DB_PORT 5432
+ENV BUGS_DB_NAME bugz
+ENV BUGS_DB_USER bugz
+ENV BUGS_DB_PASS bugzpa55-
 
 ENV BUGS_CONTEXT http://localhost:8080
 
 
 # Update distribution
 RUN apt-get update -qq && \
-    apt-get install -y git apache2 libappconfig-perl libdate-calc-perl libtemplate-perl libmime-perl build-essential libdatetime-timezone-perl libdatetime-perl libemail-sender-perl libemail-mime-perl libemail-mime-modifier-perl libdbi-perl libdbd-pg-perl libcgi-pm-perl libmath-random-isaac-perl libmath-random-isaac-xs-perl apache2-mpm-prefork libapache2-mod-perl2 libapache2-mod-perl2-dev libchart-perl libxml-perl libxml-twig-perl perlmagick libgd-graph-perl libtemplate-plugin-gd-perl libsoap-lite-perl libhtml-scrubber-perl libjson-rpc-perl libdaemon-generic-perl libtheschwartz-perl libtest-taint-perl libauthen-radius-perl libfile-slurp-perl libencode-detect-perl libmodule-build-perl libnet-ldap-perl libauthen-sasl-perl libtemplate-perl-doc libfile-mimeinfo-perl libhtml-formattext-withlinks-perl libgd-dev lynx-cur graphviz python-sphinx cpanminus supervisor memcached && \
+    apt-get install -y git apache2 libappconfig-perl libdate-calc-perl libtemplate-perl libmime-perl build-essential libdatetime-timezone-perl libdatetime-perl libemail-sender-perl libemail-mime-perl libemail-mime-modifier-perl libdbi-perl libdbd-pg-perl libcgi-pm-perl libmath-random-isaac-perl libmath-random-isaac-xs-perl libapache2-mod-perl2 libapache2-mod-perl2-dev libchart-perl libxml-perl libxml-twig-perl perlmagick libgd-graph-perl libtemplate-plugin-gd-perl libsoap-lite-perl libhtml-scrubber-perl libjson-rpc-perl libdaemon-generic-perl libtheschwartz-perl libtest-taint-perl libauthen-radius-perl libfile-slurp-perl libencode-detect-perl libmodule-build-perl libnet-ldap-perl libauthen-sasl-perl libtemplate-perl-doc libfile-mimeinfo-perl libhtml-formattext-withlinks-perl libgd-dev lynx-cur graphviz python-sphinx cpanminus supervisor memcached && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
